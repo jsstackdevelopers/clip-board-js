@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Text Copied | JSClipboard</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
+</head>
+<body>
+
+	<div class="container">
+		<pre class="Code" id="codes">
+			// Just Copy this Code
+			const centerdiv = document.getElementById("centerdiv");
+			fetch("https://jsonplaceholder.typicode.com/photos?_limit=10").then((apiData)=>{
+				return apiData.json();
+				console.log(apiData);
+			}).then((jsondata)=>{
+				jsondata.map((val) => {
+					key = val.id;
+					let img = document.createElement("img");
+					img.src = `https://picsum.photos/200/350?random=${val.id}`;				
+					centerdiv.appendChild(img);
+				});
+			});
+		</pre>
+		<i onclick="codeCopy();" class="fa fa-clone copy" id="copied"></i>
+	</div>
+
+	<script type="text/javascript">
+		
+		const codeCopy =()=>{
+			const text = document.getElementById("codes");
+			const fakeText = document.createElement("textarea");
+
+			fakeText.innerHTML = text.innerHTML;
+			document.body.appendChild(fakeText);
+
+			fakeText.select();
+			document.execCommand("copy");
+			document.body.removeChild(fakeText);
+			alert("Code has Copied");
+		}
+
+	</script>
+
+</body>
+</html>
